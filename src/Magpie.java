@@ -33,27 +33,48 @@ public class Magpie
 	{
 		String response = "";
 		if (findKeyword(statement, "no") >= 0)
-		{
 			response = "Why so negative?";
-		}
 
 		else if (findKeyword(statement, "mother") >= 0
 				|| findKeyword(statement, "father") >= 0
 				|| findKeyword(statement, "sister") >= 0
 				|| findKeyword(statement, "brother") >= 0)
-		{
 			response = "Tell me more about your family.";
-		}
+
+		// -- PETS --
         else if (findKeyword(statement, "dog") >= 0
 				|| findKeyword(statement, "cat") >= 0
 				|| findKeyword(statement, "fish") >= 0
 				|| findKeyword(statement, "turtle") >= 0)
-		{
 			response = "Tell me more about your pets.";
-        }
-        else if(findKeyword(statement, "Andrew") != -1)
         
-         response = "What a Smart guy.";
+
+		// -- Teacher --
+        else if(findKeyword(statement, "Mr. Addileta") != -1
+		|| findKeyword(statement, "Mr. A") != -1)
+			response = "Sounds like this Mr. A guy really knows whats up.";
+		
+                
+
+		 //I - something - you
+		 else if(findKeyword(statement, "I") >=0 
+				&& findKeyword(statement, "you") > 0
+				&& findKeyword(statement, "I") < findKeyword(statement, "you"))
+				{
+		
+
+			// find in between
+			int iPos = findKeyword(statement, "I");
+			int youPos = findKeyword(statement, "you");
+
+			// now that you have the locations, isolate the "something"
+			String something =  statement.substring(iPos + "I".length(), youPos).trim(); 
+			// add the something to your response
+			response = "Why do you " + something + " me?";
+				}
+
+
+		// --- I LIKE ---
         else if(findKeyword(statement, "I like") >=0){
 			//identify where "i like" is
 			int pos = findKeyword(statement, "I like");
@@ -64,6 +85,8 @@ public class Magpie
 			response = "Why do you like " + thing + "?";
 		
 		}
+
+		// -- I WANT --
 		else if (findKeyword(statement, "I want") !=-1){
 			int pos = findKeyword(statement, "I want");
 			String thing = statement.substring(pos + "I want".length()).trim();
@@ -161,7 +184,7 @@ private int findKeyword(String statement, String goal)
 	 */
 	private String getRandomResponse()
 	{
-		final int NUMBER_OF_RESPONSES = 4;
+		final int NUMBER_OF_RESPONSES = 7;
 		double r = Math.random();
 		int whichResponse = (int)(r * NUMBER_OF_RESPONSES);
 		String response = "";
@@ -182,7 +205,18 @@ private int findKeyword(String statement, String goal)
 		{
 			response = "You don't say.";
 		}
-		
+		else if (whichResponse == 4)
+		{
+			response = "That's cool.";
+		}
+		else if(whichResponse == 5)
+		{
+			response = "Can you repeat that?  I didn't hear you.";
+		}
+		else if (whichResponse == 6)
+		{
+			response = "how does that make you feel?";
+		}
 		return response;
 	}
 }
