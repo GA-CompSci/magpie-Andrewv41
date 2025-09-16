@@ -34,7 +34,7 @@ public class Magpie
 		String response = "";
 		if (findKeyword(statement, "no") >= 0)
 			response = "Why so negative?";
-
+// -- FAMILY --
 		else if (findKeyword(statement, "mother") >= 0
 				|| findKeyword(statement, "father") >= 0
 				|| findKeyword(statement, "sister") >= 0
@@ -56,7 +56,7 @@ public class Magpie
 		
                 
 
-		 //I - something - you
+		 //  -- I  (something)  you -- 
 		 else if(findKeyword(statement, "I") >=0 
 				&& findKeyword(statement, "you") > 0
 				&& findKeyword(statement, "I") < findKeyword(statement, "you"))
